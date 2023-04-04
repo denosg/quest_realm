@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import './models/custom_material_color.dart';
 import './widgets/tabs_navigation.dart';
+import './screens/quest_details_screen.dart';
 
 void main() {
   //Makes it so SystemChrome.setPreferredOrientations works
@@ -29,7 +30,7 @@ class MainApp extends StatelessWidget {
             createMaterialColor(const Color.fromARGB(10, 14, 18, 255)),
         primaryColor:
             createMaterialColor(const Color.fromARGB(10, 14, 18, 255)),
-        accentColor: Colors.white,
+        accentColor: createMaterialColor(const Color.fromRGBO(48, 25, 52, 1)),
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -41,7 +42,7 @@ class MainApp extends StatelessWidget {
         // Main page
         '/': (context) => TabsNavigation(),
         // Quest details
-        //QuestDetailsScreen.routeName:(context) => QuestDetailsScreen(),
+        QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
       },
     );
   }

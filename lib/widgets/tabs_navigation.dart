@@ -43,9 +43,8 @@ class _TabsNavigationState extends State<TabsNavigation> {
           padding: const EdgeInsets.only(top: 10),
           child: Text(
             _pages[_selectedPageIndex]['title'] as String,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'Lato',
-              color: Theme.of(context).accentColor,
               fontSize: 24,
             ),
           ),
