@@ -33,13 +33,14 @@ class AuthScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    'Quest Realm',
+                    'QuestRealm',
                     style: TextStyle(
                       color: Color.fromRGBO(173, 171, 167, 1),
                       fontSize: 45,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Flexible(
                     flex: deviceSize.width > 600 ? 2 : 1,
                     child: AuthCard(),

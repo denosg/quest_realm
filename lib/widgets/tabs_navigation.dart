@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/my_quests_screen.dart';
 
+// ignore: use_key_in_widget_constructors
 class TabsNavigation extends StatefulWidget {
   @override
   State<TabsNavigation> createState() => _TabsNavigationState();

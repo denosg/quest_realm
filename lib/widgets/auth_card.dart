@@ -108,6 +108,7 @@ class _AuthCardState extends State<AuthCard>
     final deviceSize = MediaQuery.of(context).size;
     // the AuthCard itself
     return Card(
+      color: const Color.fromRGBO(51, 0, 123, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -129,7 +130,13 @@ class _AuthCardState extends State<AuthCard>
               children: <Widget>[
                 // login e-mail TextFormField
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'E-Mail'),
+                  style:
+                      const TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                  decoration: const InputDecoration(
+                    labelText: 'E-Mail',
+                    labelStyle:
+                        TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                  ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     // verifies if the e-amil is valid
@@ -144,7 +151,13 @@ class _AuthCardState extends State<AuthCard>
                 ),
                 // login password TextFormField
                 TextFormField(
-                  decoration: const InputDecoration(labelText: 'Password'),
+                  style:
+                      const TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    labelStyle:
+                        TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                  ),
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
@@ -160,9 +173,14 @@ class _AuthCardState extends State<AuthCard>
                 if (_authMode == AuthMode.Signup)
                   // adds a new TextFormField if the user needs to signup
                   TextFormField(
+                    style: const TextStyle(
+                        color: Color.fromRGBO(173, 171, 167, 1)),
                     enabled: _authMode == AuthMode.Signup,
-                    decoration:
-                        const InputDecoration(labelText: 'Confirm Password'),
+                    decoration: const InputDecoration(
+                      labelText: 'Confirm Password',
+                      labelStyle:
+                          TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                    ),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
                         ? (value) {
@@ -187,10 +205,15 @@ class _AuthCardState extends State<AuthCard>
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 2),
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromRGBO(173, 171, 167, 1),
+                        ),
                         onPressed: _submit,
                         child: Text(
                           _authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP',
-                          style: const TextStyle(color: Colors.white),
+                          style:
+                              TextStyle(color: Theme.of(context).accentColor),
                         ),
                       ),
                     ),
@@ -205,7 +228,7 @@ class _AuthCardState extends State<AuthCard>
                     ),
                     child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
