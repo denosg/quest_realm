@@ -57,7 +57,10 @@ class _TabsNavigationState extends State<TabsNavigation> {
             padding: const EdgeInsets.only(right: 7),
             child: IconButton(
               //onPressed opens the Personal Profile Page
-              onPressed: () => Provider.of<Auth>(context).logout(),
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/');
+                Provider.of<Auth>(context, listen: false).logout();
+              },
               icon: const Icon(Icons.person_rounded, size: 33),
             ),
           )

@@ -108,7 +108,7 @@ class _AuthCardState extends State<AuthCard>
     final deviceSize = MediaQuery.of(context).size;
     // the AuthCard itself
     return Card(
-      color: const Color.fromRGBO(51, 0, 123, 1),
+      color: Color.fromRGBO(252, 250, 250, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -130,12 +130,10 @@ class _AuthCardState extends State<AuthCard>
               children: <Widget>[
                 // login e-mail TextFormField
                 TextFormField(
-                  style:
-                      const TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                  decoration: InputDecoration(
                     labelText: 'E-Mail',
-                    labelStyle:
-                        TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                    labelStyle: TextStyle(color: Theme.of(context).accentColor),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
@@ -151,12 +149,10 @@ class _AuthCardState extends State<AuthCard>
                 ),
                 // login password TextFormField
                 TextFormField(
-                  style:
-                      const TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: Theme.of(context).accentColor),
+                  decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle:
-                        TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                    labelStyle: TextStyle(color: Theme.of(context).accentColor),
                   ),
                   obscureText: true,
                   controller: _passwordController,
@@ -173,13 +169,12 @@ class _AuthCardState extends State<AuthCard>
                 if (_authMode == AuthMode.Signup)
                   // adds a new TextFormField if the user needs to signup
                   TextFormField(
-                    style: const TextStyle(
-                        color: Color.fromRGBO(173, 171, 167, 1)),
+                    style: TextStyle(color: Theme.of(context).accentColor),
                     enabled: _authMode == AuthMode.Signup,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       labelStyle:
-                          TextStyle(color: Color.fromRGBO(173, 171, 167, 1)),
+                          TextStyle(color: Theme.of(context).accentColor),
                     ),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
@@ -203,17 +198,15 @@ class _AuthCardState extends State<AuthCard>
                     borderRadius: BorderRadius.circular(30),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 2),
+                          horizontal: 25.0, vertical: 2),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromRGBO(173, 171, 167, 1),
+                          backgroundColor: Theme.of(context).accentColor,
                         ),
                         onPressed: _submit,
                         child: Text(
                           _authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP',
-                          style:
-                              TextStyle(color: Theme.of(context).accentColor),
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -228,7 +221,7 @@ class _AuthCardState extends State<AuthCard>
                     ),
                     child: Text(
                       '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD',
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: Theme.of(context).accentColor),
                     ),
                   ),
                 ),

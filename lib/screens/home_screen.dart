@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: (MediaQuery.of(context).size.height -
                   appBarHeight -
                   bottomNavBarHeight) *
-              0.94,
+              0.949,
           width: double.infinity,
           child: questsList.isEmpty
               ? Center(

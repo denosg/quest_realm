@@ -15,7 +15,7 @@ class AuthScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(252, 250, 250, 1),
+                  Color.fromRGBO(29, 5, 16, 1),
                   Color.fromRGBO(106, 36, 69, 1),
                 ],
                 begin: Alignment.topLeft,
@@ -35,9 +35,9 @@ class AuthScreen extends StatelessWidget {
                   const Text(
                     'QuestRealm',
                     style: TextStyle(
-                      color: Color.fromRGBO(173, 171, 167, 1),
                       fontSize: 45,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 10),
