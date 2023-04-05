@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/http_exception.dart';
@@ -7,7 +8,12 @@ import '../models/http_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Auth with ChangeNotifier {
+  // firebase api key
+  String firebaseApiKey = dotenv.get('FIREBASE_API_KEY');
+
   String? _token;
   DateTime? _expiryDate;
   String? _userId;
@@ -61,10 +67,9 @@ class Auth with ChangeNotifier {
   //Sign up method
   Future<void> signUp(String email, String password) async {
     try {
-      // TODO: CHANGE THE URI FOR THIS APP
       final response = await http.post(
           Uri.parse(
-              'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='),
+              'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=$firebaseApiKey'),
           body: json.encode({
             'email': email,
             'password': password,
@@ -102,7 +107,7 @@ class Auth with ChangeNotifier {
       // TODO: CHANGE THE URI FOR THIS APP
       final response = await http.post(
           Uri.parse(
-              'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='),
+              'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$firebaseApiKey'),
           body: json.encode({
             'email': email,
             'password': password,

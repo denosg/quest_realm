@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:quest_realm/providers/auth.dart';
 
@@ -9,7 +10,9 @@ import './screens/quest_details_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/splash_screen.dart';
 
-void main() {
+void main() async {
+  //Loads the API key for firebase
+  await dotenv.load(fileName: ".env");
   //Makes it so SystemChrome.setPreferredOrientations works
   WidgetsFlutterBinding.ensureInitialized();
   //Sets preffered orientations
