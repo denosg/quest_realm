@@ -64,7 +64,7 @@ class Auth with ChangeNotifier {
       // TODO: CHANGE THE URI FOR THIS APP
       final response = await http.post(
           Uri.parse(
-              'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDWehIN6Yb3ajJWz_dH1Ij04hb_1P-FG0k'),
+              'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='),
           body: json.encode({
             'email': email,
             'password': password,
@@ -102,7 +102,7 @@ class Auth with ChangeNotifier {
       // TODO: CHANGE THE URI FOR THIS APP
       final response = await http.post(
           Uri.parse(
-              'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDWehIN6Yb3ajJWz_dH1Ij04hb_1P-FG0k'),
+              'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='),
           body: json.encode({
             'email': email,
             'password': password,
