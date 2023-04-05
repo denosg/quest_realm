@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/http_exception.dart';
@@ -104,7 +103,6 @@ class Auth with ChangeNotifier {
   // Login method
   Future<void> login(String email, String password) async {
     try {
-      // TODO: CHANGE THE URI FOR THIS APP
       final response = await http.post(
           Uri.parse(
               'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$firebaseApiKey'),

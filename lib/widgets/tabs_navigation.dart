@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quest_realm/providers/auth.dart';
 
 import '../screens/home_screen.dart';
 import '../screens/my_quests_screen.dart';
@@ -55,7 +57,7 @@ class _TabsNavigationState extends State<TabsNavigation> {
             padding: const EdgeInsets.only(right: 7),
             child: IconButton(
               //onPressed opens the Personal Profile Page
-              onPressed: () {},
+              onPressed: () => Provider.of<Auth>(context).logout(),
               icon: const Icon(Icons.person_rounded, size: 33),
             ),
           )
@@ -69,8 +71,8 @@ class _TabsNavigationState extends State<TabsNavigation> {
         backgroundColor: Theme.of(context).primaryColor,
         onTap: _selectPage,
         iconSize: 30,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.white,
+        unselectedItemColor: Theme.of(context).accentColor,
+        selectedItemColor: Theme.of(context).accentColor,
         currentIndex: _selectedPageIndex,
         type: BottomNavigationBarType.fixed,
         items: const [

@@ -14,6 +14,10 @@ class QuestProvider with ChangeNotifier {
 
   QuestProvider(this.authToken, this.userId);
 
+  List<Quest> get items {
+    return [..._items];
+  }
+
   Quest findById(String id) {
     return _items.firstWhere((quest) => quest.id == id);
   }

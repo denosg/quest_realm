@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quest_realm/data/false_data.dart';
+import 'package:provider/provider.dart';
+import 'package:quest_realm/providers/quest_provider.dart';
 
 class QuestDetailsScreen extends StatelessWidget {
   static const routeName = '/quest-details-screen';
@@ -7,7 +8,7 @@ class QuestDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String id = ModalRoute.of(context)?.settings.arguments as String;
-    final selectedQuest = falseData.firstWhere((quest) => quest.id == id);
+    final selectedQuest = Provider.of<QuestProvider>(context).findById(id);
 
     return Scaffold(
       appBar: AppBar(

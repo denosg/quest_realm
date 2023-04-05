@@ -49,7 +49,7 @@ class QuestItem extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: Color.fromRGBO(173, 171, 167, 1),
+                  color: Color.fromRGBO(252, 250, 250, 1),
                 ),
               ),
             ),
@@ -64,7 +64,7 @@ class QuestItem extends StatelessWidget {
                   description,
                   style: const TextStyle(
                     fontSize: 14,
-                    color: Color.fromRGBO(173, 171, 167, 1),
+                    color: Color.fromRGBO(252, 250, 250, 1),
                   ),
                 ),
               ),

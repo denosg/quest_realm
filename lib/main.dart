@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:quest_realm/providers/auth.dart';
+import 'package:quest_realm/providers/quest_provider.dart';
+import 'package:quest_realm/screens/edit_quest_screen.dart';
 
 import './models/custom_material_color.dart';
 import './widgets/tabs_navigation.dart';
@@ -31,6 +33,13 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => Auth(),
         ),
+        ChangeNotifierProxyProvider<Auth, QuestProvider>(
+          create: (context) => QuestProvider(null, null),
+          update: (context, authData, previousQuests) => QuestProvider(
+            authData.token,
+            authData.userId,
+          ),
+        )
       ],
       // gets the AuthData here ->
       child: Consumer<Auth>(
@@ -39,15 +48,11 @@ class MainApp extends StatelessWidget {
           title: 'QuestRealm',
           // the theme of the app
           theme: ThemeData(
-            scaffoldBackgroundColor:
-                createMaterialColor(const Color.fromARGB(10, 14, 18, 255)),
             fontFamily: 'Lato',
             primarySwatch:
-                createMaterialColor(const Color.fromARGB(10, 14, 18, 255)),
-            primaryColor:
-                createMaterialColor(const Color.fromARGB(10, 14, 18, 255)),
-            accentColor:
-                createMaterialColor(const Color.fromRGBO(48, 25, 52, 1)),
+                createMaterialColor(const Color.fromRGBO(106, 36, 69, 1)),
+            primaryColor: Colors.white,
+            accentColor: const Color.fromRGBO(106, 36, 69, 1),
             pageTransitionsTheme: const PageTransitionsTheme(
               builders: {
                 TargetPlatform.android: CupertinoPageTransitionsBuilder(),
@@ -72,6 +77,7 @@ class MainApp extends StatelessWidget {
           routes: {
             // Quest details
             QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
+            EditQuestScreen.routeName: (context) => EditQuestScreen(),
           },
         ),
       ),
