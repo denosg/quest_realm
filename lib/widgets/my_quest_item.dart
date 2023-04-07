@@ -5,13 +5,13 @@ import 'package:quest_realm/providers/quest_provider.dart';
 
 import '../screens/quest_details_screen.dart';
 
-class QuestItem extends StatelessWidget {
+class MyQuestItem extends StatelessWidget {
   final String id;
   final String title;
   final String description;
   final int points;
 
-  QuestItem({
+  MyQuestItem({
     required this.id,
     required this.title,
     required this.description,
@@ -28,6 +28,39 @@ class QuestItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     return InkWell(
+      // longpressing shows an alert dialog that prompts the user to delete or not the quest
+      onLongPress: () async {
+        try {
+          // Alert dialog for deleting quest
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Are you sure ?'),
+                content: const Text('Do you want to remove your quest ?'),
+                // Options for the user regarding deleting a quest
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text('No'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Provider.of<QuestProvider>(context, listen: false)
+                          .deteleQuest(id);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Yes'),
+                  )
+                ],
+              );
+            },
+          );
+        } catch (error) {
+          scaffoldMessenger
+              .showSnackBar(const SnackBar(content: Text('Deleting failed !')));
+        }
+      },
       onTap: () => _showQuestDetails(id, context),
       child: Card(
         color: points <= 25

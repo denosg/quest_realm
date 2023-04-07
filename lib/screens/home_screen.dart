@@ -19,49 +19,42 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  // refreshes the loaded quests
+  Future<void> _refreshQuests(BuildContext context) async {
+    await Provider.of<QuestProvider>(context, listen: false)
+        .fetchAndSetQuests();
+  }
+
   @override
   Widget build(BuildContext context) {
     // gets the quests and saves them in a var
     final questData = Provider.of<QuestProvider>(context);
-    // gets the size of the app bar for multiple device support for UI
-    var appBarHeight = AppBar().preferredSize.height;
-    double bottomNavBarHeight =
-        MediaQuery.of(context).padding.bottom + kBottomNavigationBarHeight;
     // saves the quests here:
     final questsList = questData.items;
-    return Column(
-      children: [
-        SizedBox(
-          height: (MediaQuery.of(context).size.height -
-                  appBarHeight -
-                  bottomNavBarHeight) *
-              0.949,
-          width: double.infinity,
-          child: questsList.isEmpty
-              ? Center(
-                  child: Text(
-                    'No quests available !',
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
+    return FutureBuilder(
+      future: _refreshQuests(context),
+      builder: (ctx, snapshot) =>
+          snapshot.connectionState == ConnectionState.active
+              ? const Center(
+                  child: CircularProgressIndicator(),
                 )
-              : ListView.builder(
-                  itemBuilder: ((context, index) {
-                    var id = questsList[index].id;
-                    var title = questsList[index].title;
-                    var description = questsList[index].description;
-                    var points = questsList[index].points;
-                    return QuestItem(
-                        id: id,
-                        title: title,
-                        description: description,
-                        points: points);
-                  }),
-                  itemCount: questsList.length,
+              : RefreshIndicator(
+                  onRefresh: () => _refreshQuests(ctx),
+                  child: ListView.builder(
+                    itemBuilder: ((context, index) {
+                      var id = questsList[index].id;
+                      var title = questsList[index].title;
+                      var description = questsList[index].description;
+                      var points = questsList[index].points;
+                      return QuestItem(
+                          id: id,
+                          title: title,
+                          description: description,
+                          points: points);
+                    }),
+                    itemCount: questsList.length,
+                  ),
                 ),
-        ),
-      ],
     );
   }
 }

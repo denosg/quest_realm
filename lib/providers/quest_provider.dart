@@ -22,10 +22,13 @@ class QuestProvider with ChangeNotifier {
     return _items.firstWhere((quest) => quest.id == id);
   }
 
-  Future<void> fetchAndSetQuests() async {
+  Future<void> fetchAndSetQuests([bool filterByUser = false]) async {
+    // filter the quests for each user if filterByUser is true
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     // Gets the products based on userId (different products for each user)
     Uri url = Uri.parse(
-        'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/quests.json?auth=$authToken');
+        'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/quests.json?auth=$authToken&$filterString');
     try {
       //Gets the quests from the web server
       final response = await http.get(url);

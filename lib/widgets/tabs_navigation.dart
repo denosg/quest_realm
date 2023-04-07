@@ -22,7 +22,7 @@ class _TabsNavigationState extends State<TabsNavigation> {
         'title': 'Home',
       },
       {
-        'page': const MyQuestsScreen(), //My Quests Page
+        'page': MyQuestsScreen(), //My Quests Page
         'title': 'MyQuests',
       },
     ];
