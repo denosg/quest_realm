@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:quest_realm/providers/acc_quests.dart';
 import 'package:quest_realm/providers/auth.dart';
 import 'package:quest_realm/providers/quest_provider.dart';
+import 'package:quest_realm/screens/acc_quests_screen.dart';
 import 'package:quest_realm/screens/edit_quest_screen.dart';
+import 'package:quest_realm/screens/my_quests_screen.dart';
+import './providers/user_provider.dart';
 
 import './models/custom_material_color.dart';
 import './widgets/tabs_navigation.dart';
@@ -39,7 +43,21 @@ class MainApp extends StatelessWidget {
             authData.token,
             authData.userId,
           ),
-        )
+        ),
+        ChangeNotifierProxyProvider<Auth, UserProvider>(
+          create: (context) => UserProvider(authToken: null, userId: null),
+          update: (context, authData, previousUser) => UserProvider(
+            authToken: authData.token,
+            userId: authData.userId,
+          ),
+        ),
+        ChangeNotifierProxyProvider<Auth, AccQuests>(
+          create: (context) => AccQuests(null, null),
+          update: (context, authData, previousAccQuest) => AccQuests(
+            authData.token,
+            authData.userId,
+          ),
+        ),
       ],
       // gets the AuthData here ->
       child: Consumer<Auth>(
@@ -77,7 +95,12 @@ class MainApp extends StatelessWidget {
           routes: {
             // Quest details
             QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
+            // Edit Quest Screen
             EditQuestScreen.routeName: (context) => EditQuestScreen(),
+            // My Quests Screen
+            MyQuestsScreen.routeName: (context) => MyQuestsScreen(),
+            // Accepted Quests Screen
+            AccQuestsScreen.routeName: (context) => AccQuestsScreen(),
           },
         ),
       ),

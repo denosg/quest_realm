@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quest_realm/providers/acc_quests.dart';
 import 'package:quest_realm/providers/quest_provider.dart';
 
 class QuestDetailsScreen extends StatelessWidget {
@@ -19,7 +20,14 @@ class QuestDetailsScreen extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             minimumSize: Size(100, 50),
             backgroundColor: Theme.of(context).accentColor),
-        onPressed: () {},
+        onPressed: () async {
+          await Provider.of<AccQuests>(context, listen: false)
+              .addAccQuest(selectedQuest);
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Quest accepted !'),
+            duration: Duration(seconds: 2),
+          ));
+        },
         child: const Text('Take on this quest !'),
       ),
       body: Column(

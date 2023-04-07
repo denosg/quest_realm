@@ -6,6 +6,7 @@ import '../screens/edit_quest_screen.dart';
 import '../widgets/my_quest_item.dart';
 
 class MyQuestsScreen extends StatelessWidget {
+  static const routeName = '/my-quests-screen';
   // We need to have listen: false, otherwise it gets in an infinite loop
   // show the quests created by each user
   Future<void> _refreshQuests(BuildContext context) async {
