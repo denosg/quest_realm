@@ -19,11 +19,21 @@ class CustomDrawer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.of(context).pushReplacementNamed('/');
+            },
+          ),
+          const Divider(),
+          ListTile(
             leading: const Icon(Icons.assignment_turned_in_outlined),
             title: const Text('Accepted Quests'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.of(context).pushNamed(AccQuestsScreen.routeName);
+              Navigator.of(context)
+                  .pushReplacementNamed(AccQuestsScreen.routeName);
             },
           ),
           const Divider(),
@@ -32,7 +42,8 @@ class CustomDrawer extends StatelessWidget {
               title: const Text('MyQuests'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.of(context).pushNamed(MyQuestsScreen.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(MyQuestsScreen.routeName);
               }),
           const Divider(),
           ListTile(

@@ -36,16 +36,16 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
   void didChangeDependencies() {
     if (_isInit) {
       // gets the id of the quest edited (already existing quest)
-      final questId = ModalRoute.of(context)!.settings.arguments;
+      final questId = ModalRoute.of(context)!.settings.arguments as String;
       if (questId != null) {
         _isInList = true;
         final quest = Provider.of<QuestProvider>(context, listen: false)
-            .findById(questId as String);
+            .findById(questId);
         _editedQuest = quest;
         _initValues = {
           'title': _editedQuest.title,
           'description': _editedQuest.description,
-          'points': _editedQuest.points,
+          'points': _editedQuest.points.toString(),
         };
       }
     }
@@ -111,6 +111,7 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
           child: ListView(
             children: [
               TextFormField(
+                autocorrect: false,
                 initialValue: _initValues['title'],
                 decoration: InputDecoration(
                     labelText: 'Title',
@@ -136,6 +137,7 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
                 },
               ),
               TextFormField(
+                autocorrect: false,
                 initialValue: _initValues['description'],
                 decoration: const InputDecoration(
                   labelText: 'Description',
@@ -159,6 +161,7 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
                 },
               ),
               TextFormField(
+                autocorrect: false,
                 initialValue: _initValues['points'],
                 decoration: const InputDecoration(
                   labelText: 'Points',

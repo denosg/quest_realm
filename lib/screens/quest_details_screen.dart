@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/providers/acc_quests.dart';
 import 'package:quest_realm/providers/quest_provider.dart';
+import 'package:quest_realm/screens/edit_quest_screen.dart';
 
 class QuestDetailsScreen extends StatelessWidget {
   static const routeName = '/quest-details-screen';
@@ -18,17 +18,13 @@ class QuestDetailsScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            minimumSize: Size(100, 50),
+            minimumSize: const Size(100, 50),
             backgroundColor: Theme.of(context).accentColor),
-        onPressed: () async {
-          await Provider.of<AccQuests>(context, listen: false)
-              .addAccQuest(selectedQuest);
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Quest accepted !'),
-            duration: Duration(seconds: 2),
-          ));
+        onPressed: () {
+          Navigator.of(context)
+              .pushNamed(EditQuestScreen.routeName, arguments: id);
         },
-        child: const Text('Take on this quest !'),
+        child: const Text('Edit Quest !'),
       ),
       body: Column(
         children: [

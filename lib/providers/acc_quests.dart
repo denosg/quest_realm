@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import '../models/quest.dart';
+import '/providers/quest_provider.dart';
 
 import 'package:http/http.dart' as http;
 

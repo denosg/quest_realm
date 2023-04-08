@@ -40,35 +40,7 @@ class _TabsNavigationState extends State<TabsNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    AppBar customAppBar = AppBar(
-      //title on top
-      title: Container(
-        padding: const EdgeInsets.only(top: 10),
-        child: Text(
-          _pages[_selectedPageIndex]['title'] as String,
-          style: const TextStyle(
-            fontFamily: 'Lato',
-            fontSize: 24,
-          ),
-        ),
-      ),
-      actions: [
-        Container(
-          padding: const EdgeInsets.only(right: 7),
-          child: IconButton(
-            //onPressed opens the Personal Profile Page
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed('/');
-              Provider.of<Auth>(context, listen: false).logout();
-            },
-            icon: const Icon(Icons.person_rounded, size: 33),
-          ),
-        )
-      ],
-    );
-
     return Scaffold(
-      appBar: customAppBar,
       // custom drawer
       drawer: const CustomDrawer(),
       // Shows the widget in the chosen page

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/quest_provider.dart';
 import '../screens/edit_quest_screen.dart';
+import '../widgets/custom_drawer.dart';
 import '../widgets/my_quest_item.dart';
 
 class MyQuestsScreen extends StatelessWidget {
@@ -17,6 +18,29 @@ class MyQuestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        //title on top
+        title: Container(
+          padding: const EdgeInsets.only(top: 10),
+          child: const Text(
+            'MyQuests',
+            style: TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 24,
+            ),
+          ),
+        ),
+        actions: [
+          Container(
+            padding: const EdgeInsets.only(right: 7),
+            // the amount of points the user has
+            child: Center(
+              child: Text('75 points',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            ),
+          )
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: CircleAvatar(
         backgroundColor: Theme.of(context).accentColor,
@@ -31,6 +55,7 @@ class MyQuestsScreen extends StatelessWidget {
           ),
         ),
       ),
+      drawer: const CustomDrawer(),
       body: FutureBuilder(
         // loads the products by user
         future: _refreshQuests(context),
