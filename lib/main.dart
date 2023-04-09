@@ -44,8 +44,7 @@ class MainApp extends StatelessWidget {
             authData.userId,
           ),
         ),
-        ChangeNotifierProxyProvider<Auth, UserProvider>(
-          create: (context) => UserProvider(authToken: null, userId: null),
+        ListenableProxyProvider<Auth, UserProvider>(
           update: (context, authData, previousUser) => UserProvider(
             authToken: authData.token,
             userId: authData.userId,

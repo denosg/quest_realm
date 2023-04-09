@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:quest_realm/models/custom_material_color.dart';
 import 'package:quest_realm/models/quest.dart';
 import 'package:quest_realm/providers/quest_provider.dart';
+import 'package:quest_realm/providers/user_provider.dart';
 
 import '../providers/acc_quests.dart';
 
@@ -46,7 +47,7 @@ class _QuestItemState extends State<QuestItem> {
                     ? createMaterialColor(const Color.fromRGBO(156, 10, 54, 1))
                     : createMaterialColor(const Color.fromRGBO(93, 89, 79, 1)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(13),
         child: Column(
           children: [
             Padding(
@@ -91,26 +92,40 @@ class _QuestItemState extends State<QuestItem> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
               height: _expanded ? max(widget.description.length * 0.1, 60) : 0,
               child: Container(
-                child: ElevatedButton(
-                  // add acc quest to database
-                  onPressed: () async {
-                    await Provider.of<AccQuests>(context, listen: false)
-                        .addAccQuest(Quest(
-                      id: widget.id,
-                      title: widget.title,
-                      description: widget.description,
-                      points: widget.points,
-                    ));
-                    await Provider.of<QuestProvider>(context, listen: false)
-                        .deteleQuest(widget.id);
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Quest accepted !'),
-                      duration: Duration(seconds: 2),
-                    ));
-                  },
-                  child: const Text(
-                    'Take on this quest !',
-                    style: TextStyle(color: Color.fromRGBO(252, 250, 250, 1)),
+                child: Consumer<UserProvider>(
+                  builder: (context, userData, _) => ElevatedButton(
+                    // add acc quest to database
+                    onPressed: () async {
+                      final scaffoldContext = ScaffoldMessenger.of(context);
+
+                      final accQuestsProvider =
+                          Provider.of<AccQuests>(context, listen: false);
+                      final userProvider =
+                          Provider.of<UserProvider>(context, listen: false);
+                      final questProvider =
+                          Provider.of<QuestProvider>(context, listen: false);
+
+                      await accQuestsProvider.addAccQuest(Quest(
+                        id: widget.id,
+                        title: widget.title,
+                        description: widget.description,
+                        points: widget.points,
+                      ));
+
+                      await userProvider.addPointsByAccQuest(
+                          widget.points, userData.user.userKey);
+
+                      await questProvider.deteleQuest(widget.id);
+
+                      scaffoldContext.showSnackBar(const SnackBar(
+                        content: Text('Quest accepted !'),
+                        duration: Duration(seconds: 2),
+                      ));
+                    },
+                    child: const Text(
+                      'Take on this quest !',
+                      style: TextStyle(color: Color.fromRGBO(252, 250, 250, 1)),
+                    ),
                   ),
                 ),
               ),

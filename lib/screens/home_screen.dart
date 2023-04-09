@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
-import 'package:quest_realm/widgets/custom_drawer.dart';
 
+import '../providers/quest_provider.dart';
+import '../widgets/custom_drawer.dart';
 import '../widgets/quest_item.dart';
+import '../providers/user_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,6 +12,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  var _isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    // fetches user info from the firebase database
+    Provider.of<UserProvider>(context, listen: false).fetchUserInfo();
+    super.didChangeDependencies();
+  }
+
   @override
   void initState() {
     // fetches the quests from the firebase database
@@ -49,11 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             padding: const EdgeInsets.only(right: 7),
             // the amount of points the user has
-            child: Center(
-              child: Text('75 points',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            child: Consumer<UserProvider>(
+              builder: (context, userData, _) => Center(
+                child: Text('${userData.user.points.toString()} points',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
+              ),
             ),
-          )
+          ),
         ],
       ),
       drawer: const CustomDrawer(),
@@ -66,19 +79,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 : RefreshIndicator(
                     onRefresh: () => _refreshQuests(ctx),
-                    child: ListView.builder(
-                      itemBuilder: ((context, index) {
-                        var id = questsList[index].id;
-                        var title = questsList[index].title;
-                        var description = questsList[index].description;
-                        var points = questsList[index].points;
-                        return QuestItem(
-                            id: id,
-                            title: title,
-                            description: description,
-                            points: points);
-                      }),
-                      itemCount: questsList.length,
+                    child: Padding(
+                      padding: const EdgeInsets.all(7),
+                      child: ListView.builder(
+                        itemBuilder: ((context, index) {
+                          var id = questsList[index].id;
+                          var title = questsList[index].title;
+                          var description = questsList[index].description;
+                          var points = questsList[index].points;
+                          return QuestItem(
+                              id: id,
+                              title: title,
+                              description: description,
+                              points: points);
+                        }),
+                        itemCount: questsList.length,
+                      ),
                     ),
                   ),
       ),

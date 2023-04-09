@@ -6,6 +6,7 @@ import '../models/http_exception.dart';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../models/user.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -64,7 +65,7 @@ class Auth with ChangeNotifier {
   }
 
   //Sign up method
-  Future<void> signUp(String email, String password) async {
+  Future<void> signUp(String email, String password, User newUser) async {
     try {
       final response = await http.post(
           Uri.parse(
@@ -95,6 +96,23 @@ class Auth with ChangeNotifier {
       });
       // sets user's data regarding the auth
       prefs.setString('userData', userData);
+      //Send json data to server database regarding user info
+      Uri url = Uri.parse(
+          'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=$_token');
+      try {
+        //This registers as a 'TODO' function (loads at the end, async task)
+        //Waits for this operation to finish before going to the next lines of code
+        final userResponse = await http.post(url,
+            body: json.encode({
+              'userId': _userId,
+              'username': newUser.username,
+              'points': newUser.points,
+            }));
+        notifyListeners();
+      } catch (error) {
+        print(error);
+        throw error;
+      }
     } on HttpException catch (e) {
       throw e;
     }

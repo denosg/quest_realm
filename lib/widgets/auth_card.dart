@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../models/http_exception.dart ';
 import '../providers/auth.dart';
+import '../providers/user_provider.dart';
+import '../models/user.dart';
 
 // ignore: constant_identifier_names
 enum AuthMode { Signup, Login }
@@ -20,6 +22,7 @@ class _AuthCardState extends State<AuthCard>
   Map<String, String> _authData = {
     'email': '',
     'password': '',
+    'username': '',
   };
   var _isLoading = false;
   final _passwordController = TextEditingController();
@@ -60,9 +63,10 @@ class _AuthCardState extends State<AuthCard>
         );
       } else {
         // Sign user up
-        await Provider.of<Auth>(context, listen: false).signUp(
+        var result = await Provider.of<Auth>(context, listen: false).signUp(
           _authData['email'] as String,
           _authData['password'] as String,
+          User(_authData['username'] as String, '', ''),
         );
       }
       // error handling ->
@@ -90,6 +94,12 @@ class _AuthCardState extends State<AuthCard>
     });
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   void _switchAuthMode() {
     if (_authMode == AuthMode.Login) {
       setState(() {
@@ -108,7 +118,7 @@ class _AuthCardState extends State<AuthCard>
     final deviceSize = MediaQuery.of(context).size;
     // the AuthCard itself
     return Card(
-      color: Color.fromRGBO(252, 250, 250, 1),
+      color: const Color.fromRGBO(252, 250, 250, 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -117,7 +127,7 @@ class _AuthCardState extends State<AuthCard>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.linear,
-        height: _authMode == AuthMode.Signup ? 320 : 260,
+        height: _authMode == AuthMode.Signup ? 380 : 260,
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.Signup ? 320 : 260),
         width: deviceSize.width * 0.75,
@@ -128,6 +138,27 @@ class _AuthCardState extends State<AuthCard>
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                // username
+                if (_authMode == AuthMode.Signup)
+                  TextFormField(
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      labelStyle:
+                          TextStyle(color: Theme.of(context).accentColor),
+                    ),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      // verifies if the e-amil is valid
+                      if (value!.isEmpty) {
+                        return 'Please provide a username !';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _authData['username'] = value!;
+                    },
+                  ),
                 // login e-mail TextFormField
                 TextFormField(
                   style: TextStyle(color: Theme.of(context).accentColor),
@@ -139,7 +170,7 @@ class _AuthCardState extends State<AuthCard>
                   validator: (value) {
                     // verifies if the e-amil is valid
                     if (value!.isEmpty || !value.contains('@')) {
-                      return 'Invalid email!';
+                      return 'Invalid email !';
                     }
                     return null;
                   },
@@ -159,7 +190,7 @@ class _AuthCardState extends State<AuthCard>
                   validator: (value) {
                     // verifies if the password is valid (simple validation)
                     if (value!.isEmpty || value.length < 5) {
-                      return 'Password is too short!';
+                      return 'Password is too short !';
                     }
                   },
                   onSaved: (value) {
@@ -181,7 +212,7 @@ class _AuthCardState extends State<AuthCard>
                         ? (value) {
                             // verifies if the password entered is the same as verified password
                             if (value != _passwordController.text) {
-                              return 'Passwords do not match!';
+                              return 'Passwords do not match !';
                             }
                           }
                         : null,

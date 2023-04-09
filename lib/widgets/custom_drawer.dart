@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quest_realm/providers/user_provider.dart';
 import 'package:quest_realm/screens/acc_quests_screen.dart';
 
-import '../screens/my_quests_screen.dart';
 import '../providers/auth.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -13,9 +13,11 @@ class CustomDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          AppBar(
-            title: const Text('Hello !'),
-            automaticallyImplyLeading: false,
+          Consumer<UserProvider>(
+            builder: (context, userData, _) => AppBar(
+              title: Text('Hello, ${userData.user.username} !'),
+              automaticallyImplyLeading: false,
+            ),
           ),
           const SizedBox(height: 8),
           ListTile(
@@ -36,15 +38,15 @@ class CustomDrawer extends StatelessWidget {
                   .pushReplacementNamed(AccQuestsScreen.routeName);
             },
           ),
-          const Divider(),
-          ListTile(
-              leading: const Icon(Icons.quiz_outlined),
-              title: const Text('MyQuests'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.of(context)
-                    .pushReplacementNamed(MyQuestsScreen.routeName);
-              }),
+          // const Divider(),
+          // ListTile(
+          //     leading: const Icon(Icons.quiz_outlined),
+          //     title: const Text('MyQuests'),
+          //     onTap: () {
+          //       Navigator.pop(context);
+          //       Navigator.of(context)
+          //           .pushReplacementNamed(MyQuestsScreen.routeName);
+          //     }),
           const Divider(),
           ListTile(
               leading: const Icon(Icons.exit_to_app_rounded),

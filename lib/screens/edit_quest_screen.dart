@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 import 'package:quest_realm/models/quest.dart';
 import 'package:quest_realm/providers/quest_provider.dart';
+import 'package:quest_realm/providers/user_provider.dart';
 
 class EditQuestScreen extends StatefulWidget {
   static const routeName = '/edit-quest';
@@ -36,7 +37,7 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
   void didChangeDependencies() {
     if (_isInit) {
       // gets the id of the quest edited (already existing quest)
-      final questId = ModalRoute.of(context)!.settings.arguments as String;
+      final questId = ModalRoute.of(context)?.settings.arguments as String?;
       if (questId != null) {
         _isInList = true;
         final quest = Provider.of<QuestProvider>(context, listen: false)
@@ -160,40 +161,47 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
                   return null;
                 },
               ),
-              TextFormField(
-                autocorrect: false,
-                initialValue: _initValues['points'],
-                decoration: const InputDecoration(
-                  labelText: 'Points',
+              Consumer<UserProvider>(
+                builder: (context, userData, _) => TextFormField(
+                  autocorrect: false,
+                  initialValue: _initValues['points'],
+                  decoration: const InputDecoration(
+                    labelText: 'Points',
+                  ),
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.number,
+                  onSaved: (points) {
+                    if (points != null) {
+                      _editedQuest = Quest(
+                        id: _editedQuest.id,
+                        title: _editedQuest.title,
+                        description: _editedQuest.description,
+                        points: int.parse(points),
+                      );
+                    }
+                  },
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Please enter the points';
+                    }
+                    if (value != null) {
+                      if (int.tryParse(value) == null) {
+                        return 'Please enter a valid number';
+                      }
+                    }
+                    if (value != null) {
+                      if (int.parse(value) <= 0) {
+                        return 'Please enter a number > 0';
+                      }
+                    }
+                    if (value != null) {
+                      if (int.parse(value) > userData.user.points) {
+                        return 'You don\'t have enough points !';
+                      }
+                    }
+                    return null;
+                  },
                 ),
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.number,
-                onSaved: (points) {
-                  if (points != null) {
-                    _editedQuest = Quest(
-                      id: _editedQuest.id,
-                      title: _editedQuest.title,
-                      description: _editedQuest.description,
-                      points: int.parse(points),
-                    );
-                  }
-                },
-                validator: (value) {
-                  if (value == '') {
-                    return 'Please enter the points';
-                  }
-                  if (value != null) {
-                    if (double.tryParse(value) == null) {
-                      return 'Please enter a valid number';
-                    }
-                  }
-                  if (value != null) {
-                    if (double.parse(value) <= 0) {
-                      return 'Please enter a number > 0';
-                    }
-                  }
-                  return null;
-                },
               ),
             ],
           ),

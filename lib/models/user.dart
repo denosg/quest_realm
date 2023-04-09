@@ -1,7 +1,8 @@
 class User {
-  final String id;
-  final String userName;
-  final int startingPoints = 75;
+  String username;
+  int points = 75;
+  String userId;
+  String userKey;
 
-  User({required this.id, required this.userName});
+  User(this.username, this.userId, this.userKey);
 }

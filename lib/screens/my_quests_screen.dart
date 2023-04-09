@@ -5,6 +5,7 @@ import '../providers/quest_provider.dart';
 import '../screens/edit_quest_screen.dart';
 import '../widgets/custom_drawer.dart';
 import '../widgets/my_quest_item.dart';
+import '../providers/user_provider.dart';
 
 class MyQuestsScreen extends StatelessWidget {
   static const routeName = '/my-quests-screen';
@@ -34,9 +35,12 @@ class MyQuestsScreen extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(right: 7),
             // the amount of points the user has
-            child: Center(
-              child: Text('75 points',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            child: Consumer<UserProvider>(
+              builder: (context, userData, _) => Center(
+                child: Text('${userData.user.points.toString()} points',
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
+              ),
             ),
           )
         ],

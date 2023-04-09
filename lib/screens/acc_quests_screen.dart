@@ -23,11 +23,16 @@ class AccQuestsScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else {
             return Consumer<AccQuests>(
-              builder: (context, accQuestData, _) => ListView.builder(
-                itemCount: accQuestData.accQuests.length,
-                itemBuilder: (ctx, index) =>
-                    AccQuestUItem(accQuestData.accQuests[index]),
-              ),
+              builder: (context, accQuestData, _) => accQuestData
+                      .accQuests.isEmpty
+                  ? const Center(
+                      child: Text('You don\'t have any accepted quests yet !'),
+                    )
+                  : ListView.builder(
+                      itemCount: accQuestData.accQuests.length,
+                      itemBuilder: (ctx, index) =>
+                          AccQuestUItem(accQuestData.accQuests[index]),
+                    ),
             );
           }
         },
