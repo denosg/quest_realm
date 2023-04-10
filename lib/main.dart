@@ -17,8 +17,6 @@ import './screens/auth_screen.dart';
 import './screens/splash_screen.dart';
 import './screens/ranking_screen.dart';
 
-// TODO: remove points from user when creating quest + update quest (watch out when updating quest points)
-
 void main() async {
   //Loads the API key for firebase
   await dotenv.load(fileName: ".env");

@@ -37,7 +37,8 @@ class MyQuestItem extends StatelessWidget {
             builder: (context) {
               return AlertDialog(
                 title: const Text('Are you sure ?'),
-                content: const Text('Do you want to remove your quest ?'),
+                content: const Text(
+                    'Do you want to remove your quest ? The points will be lost.'),
                 // Options for the user regarding deleting a quest
                 actions: [
                   TextButton(
