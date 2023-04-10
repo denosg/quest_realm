@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
-import 'package:quest_realm/screens/edit_quest_screen.dart';
+
+import '../providers/quest_provider.dart';
+import '../screens/edit_quest_screen.dart';
 
 class QuestDetailsScreen extends StatelessWidget {
   static const routeName = '/quest-details-screen';

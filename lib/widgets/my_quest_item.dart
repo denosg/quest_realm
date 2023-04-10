@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/models/custom_material_color.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
 
+import '../models/custom_material_color.dart';
+import '../providers/quest_provider.dart';
 import '../screens/quest_details_screen.dart';
 
 class MyQuestItem extends StatelessWidget {

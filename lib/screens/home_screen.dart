@@ -18,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void didChangeDependencies() {
     // fetches user info from the firebase database
     Provider.of<UserProvider>(context, listen: false).fetchUserInfo();
+    // loads user list
+    Provider.of<UserProvider>(context, listen: false).fetchUsers();
     super.didChangeDependencies();
   }
 

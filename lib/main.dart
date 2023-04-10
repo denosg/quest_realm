@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/providers/acc_quests.dart';
-import 'package:quest_realm/providers/auth.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
-import 'package:quest_realm/screens/acc_quests_screen.dart';
-import 'package:quest_realm/screens/edit_quest_screen.dart';
-import 'package:quest_realm/screens/my_quests_screen.dart';
-import './providers/user_provider.dart';
 
+import './providers/acc_quests.dart';
+import './providers/auth.dart';
+import './providers/quest_provider.dart';
+import './screens/acc_quests_screen.dart';
+import './screens/edit_quest_screen.dart';
+import './screens/my_quests_screen.dart';
+import './providers/user_provider.dart';
 import './models/custom_material_color.dart';
 import './widgets/tabs_navigation.dart';
 import './screens/quest_details_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/splash_screen.dart';
+import './screens/ranking_screen.dart';
 
-// TODO: add ranking system
 // TODO: remove points from user when creating quest + update quest (watch out when updating quest points)
 
 void main() async {
@@ -103,6 +103,8 @@ class MainApp extends StatelessWidget {
             MyQuestsScreen.routeName: (context) => MyQuestsScreen(),
             // Accepted Quests Screen
             AccQuestsScreen.routeName: (context) => AccQuestsScreen(),
+            // Ranking Screen
+            RankingScreen.routeName: (context) => RankingScreen(),
           },
         ),
       ),

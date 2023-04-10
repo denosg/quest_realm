@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/models/custom_material_color.dart';
-import 'package:quest_realm/models/quest.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
-import 'package:quest_realm/providers/user_provider.dart';
 
+import '../models/custom_material_color.dart';
+import '../models/quest.dart';
+import '../providers/quest_provider.dart';
+import '../providers/user_provider.dart';
 import '../providers/acc_quests.dart';
 
 class QuestItem extends StatefulWidget {
@@ -122,9 +122,12 @@ class _QuestItemState extends State<QuestItem> {
                         duration: Duration(seconds: 2),
                       ));
                     },
-                    child: const Text(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromRGBO(252, 250, 250, 1)),
+                    child: Text(
                       'Take on this quest !',
-                      style: TextStyle(color: Color.fromRGBO(252, 250, 250, 1)),
+                      style: TextStyle(color: Theme.of(context).accentColor),
                     ),
                   ),
                 ),

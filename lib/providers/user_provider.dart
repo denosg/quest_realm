@@ -10,11 +10,16 @@ class UserProvider with ChangeNotifier {
   final String? authToken;
   final String? userId;
   final User _user = User('', '', '');
+  List<User> _userList = [];
 
   UserProvider({required this.authToken, required this.userId});
 
   User get user {
     return _user;
+  }
+
+  List<User> get userList {
+    return [..._userList];
   }
 
   Future<void> fetchUserInfo() async {
@@ -37,6 +42,31 @@ class UserProvider with ChangeNotifier {
       throw error;
     }
     print('username: ${_user.username}, points: ${user.points}');
+  }
+
+  Future<void> fetchUsers() async {
+    // gets the users
+    Uri url = Uri.parse(
+        'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=$authToken');
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<User> tempUserList = [];
+      if (extractedData == null) {
+        return;
+      }
+      // saves the data locally in the memory
+      extractedData.forEach((userKey, userData) {
+        tempUserList.add(User(userData['username'], userData['userId'], userKey,
+            points: userData['points']));
+      });
+      // sorts the list by most amount of points
+      tempUserList.sort((a, b) => b.points.compareTo(a.points));
+      _userList = tempUserList;
+      print(_userList);
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> addPointsByAccQuest(int questPoints, String userKey) async {

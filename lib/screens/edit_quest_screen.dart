@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
-import 'package:quest_realm/models/quest.dart';
-import 'package:quest_realm/providers/quest_provider.dart';
-import 'package:quest_realm/providers/user_provider.dart';
+
+import '../models/quest.dart';
+import '../providers/quest_provider.dart';
+import '../providers/user_provider.dart';
 
 class EditQuestScreen extends StatefulWidget {
   static const routeName = '/edit-quest';

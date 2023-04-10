@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../providers/auth.dart';
 import '../widgets/custom_drawer.dart';
 import '../screens/home_screen.dart';
 import '../screens/my_quests_screen.dart';
