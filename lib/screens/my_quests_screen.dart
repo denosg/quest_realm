@@ -21,14 +21,11 @@ class MyQuestsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //title on top
-        title: Container(
-          padding: const EdgeInsets.only(top: 10),
-          child: const Text(
-            'MyQuests',
-            style: TextStyle(
-              fontFamily: 'Lato',
-              fontSize: 24,
-            ),
+        title: const Text(
+          'MyQuests',
+          style: TextStyle(
+            fontFamily: 'Lato',
+            fontSize: 24,
           ),
         ),
         actions: [

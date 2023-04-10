@@ -82,7 +82,7 @@ class MyQuestItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               // Title and the amount of points given
               child: Text(
-                "$title , $points points",
+                "$title, $points points",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

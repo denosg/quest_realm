@@ -54,7 +54,7 @@ class _QuestItemState extends State<QuestItem> {
               padding: const EdgeInsets.only(top: 15),
               // Title and the amount of points given
               child: Text(
-                "${widget.title} , ${widget.points} points",
+                "${widget.title}, ${widget.points} points",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
