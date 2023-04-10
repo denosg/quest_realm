@@ -85,15 +85,15 @@ class UserProvider with ChangeNotifier {
 
   Future<void> removePointsByCreateQuest(
       int questPoints, String userKey) async {
-    // Target the user that we want to add the points to
+    // update the points inside the user key
     Uri url = Uri.parse(
-        'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/users/$userKey.json?auth=$authToken');
-    // update the points
-    await http.patch(url,
-        body: json.encode({
-          'points': (_user.points - questPoints),
-        }));
-    // update in local memory
+        'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/users/$userKey/points.json?auth=$authToken');
+    await http.put(
+      url,
+      body: json.encode((_user.points - questPoints)),
+    );
+
+    // update the points in local memory
     _user.points -= questPoints;
     notifyListeners();
   }

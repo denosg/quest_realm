@@ -14,7 +14,6 @@ class EditQuestScreen extends StatefulWidget {
 
 class _EditQuestScreenState extends State<EditQuestScreen> {
   // we are going to use a form to get the data we need
-  // TODO: edit form to accept only points if you have more than how much you can give
 
   // temp quest
   var _editedQuest = Quest(id: '', title: '', description: '', points: 0);
@@ -25,6 +24,7 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
   var _isInit = true;
   var _isLoading = false;
   var _isInList = false;
+  int initialPoints = 0;
 
   var _initValues = <String, dynamic>{
     'title': null,
@@ -47,27 +47,45 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
           'description': _editedQuest.description,
           'points': _editedQuest.points.toString(),
         };
+        initialPoints = int.parse(_initValues['points']);
       }
     }
     _isInit = false;
     super.didChangeDependencies();
   }
 
-  Future<void> _saveForm() async {
+  Future<void> _saveForm(String userKey) async {
     final isValid = _form.currentState?.validate();
     if (isValid == false || isValid == null) {
       return;
     }
     _form.currentState?.save();
     if (_editedQuest.id != '') {
+      final userProvider = context.read<UserProvider>();
+
       // updates the existing quest
       await Provider.of<QuestProvider>(context, listen: false)
           .updateQuest(_editedQuest.id, _editedQuest);
+
+      if (initialPoints > _editedQuest.points) {
+        int addPoints = initialPoints - _editedQuest.points;
+        // adds points since initial points > new amount of points for quest
+        await userProvider.addPointsByAccQuest(addPoints, userKey);
+      } else if (initialPoints < _editedQuest.points) {
+        int removePoints = _editedQuest.points - initialPoints;
+        // removes points since initial points < new amount of points for quest
+        await userProvider.removePointsByCreateQuest(removePoints, userKey);
+      }
     } else {
       try {
         // adds a new quest in the database
-        await Provider.of<QuestProvider>(context, listen: false)
-            .addQuest(_editedQuest);
+        context.read<QuestProvider>().addQuest(_editedQuest);
+
+        // removes the points created by the quest
+        context.read<UserProvider>().removePointsByCreateQuest(
+              _editedQuest.points,
+              userKey,
+            );
         // error handling ->
       } catch (error) {
         await showDialog<Null>(
@@ -89,21 +107,24 @@ class _EditQuestScreenState extends State<EditQuestScreen> {
                 ));
       }
     }
-    Navigator.of(context).pop();
+    // after saving the quest, the user is pushed to main screen
+    Navigator.of(context).pushReplacementNamed('/');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _isInList ? Text('Edit quest') : Text('Add quest'),
+        title: _isInList ? const Text('Edit quest') : const Text('Add quest'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: IconButton(
-          onPressed: _saveForm,
-          icon: const Icon(
-            Icons.save_alt,
-          )),
+      floatingActionButton: Consumer<UserProvider>(
+        builder: (context, userData, _) => IconButton(
+            onPressed: () => _saveForm(userData.user.userKey),
+            icon: const Icon(
+              Icons.save_alt,
+            )),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Form(
