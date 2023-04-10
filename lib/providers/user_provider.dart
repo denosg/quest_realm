@@ -42,6 +42,7 @@ class UserProvider with ChangeNotifier {
       throw error;
     }
     print('username: ${_user.username}, points: ${user.points}');
+    notifyListeners();
   }
 
   Future<void> fetchUsers() async {
@@ -64,6 +65,7 @@ class UserProvider with ChangeNotifier {
       tempUserList.sort((a, b) => b.points.compareTo(a.points));
       _userList = tempUserList;
       print(_userList);
+      notifyListeners();
     } catch (error) {
       throw error;
     }
