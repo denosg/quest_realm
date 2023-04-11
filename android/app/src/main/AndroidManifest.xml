@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quest_realm">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="quest_realm"
         android:name="${applicationName}"
