@@ -39,7 +39,7 @@ The custom drawer includes four options: home, accepted quests, ranking, and log
 
 **Personal Touch: Daily Gift Function**
 
-As a software engineer working on the Quest App, I wanted to create a feature that would encourage users to return to the app on a daily basis. To achieve this, I implemented a daily gift function with a roulette-style spin wheel. The daily gift function is accessed through a separate tab in the custom drawer. When a user clicks on the tab, they are taken to the daily gift screen where they can spin the roulette-style wheel once per day where the user can win from 0 to 75 points. I also used Firebase Cloud Database to store information about the user's daily gift spins. Overall, I'm proud of how the daily gift function turned out. It's a fun and interactive feature that encourages users to return to the app daily and engage with the content.
+As a programming enthusiast working on the Quest App, I wanted to create a feature that would encourage users to return to the app on a daily basis. To achieve this, I implemented a daily gift function with a roulette-style spin wheel. The daily gift function is accessed through a separate tab in the custom drawer. When a user clicks on the tab, they are taken to the daily gift screen where they can spin the roulette-style wheel once per day where the user can win from 0 to 75 points. I also used Firebase Cloud Database to store information about the user's daily gift spins. Overall, I'm proud of how the daily gift function turned out. It's a fun and interactive feature that encourages users to return to the app daily and engage with the content.
 
 **Conclusion**
 
