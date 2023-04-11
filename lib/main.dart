@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:quest_realm/screens/quest_details_screen.dart';
 import 'package:quest_realm/screens/roulette_screen.dart';
 
 import './providers/acc_quests.dart';
@@ -103,6 +104,8 @@ class MainApp extends StatelessWidget {
             RankingScreen.routeName: (context) => RankingScreen(),
             // Roulette Screen
             RouletteScreen.routeName: (context) => RouletteScreen(),
+            // Quest Details Screen
+            QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
           },
         ),
       ),

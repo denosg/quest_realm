@@ -5,6 +5,7 @@ import 'package:quest_realm/screens/ranking_screen.dart';
 import '../providers/user_provider.dart';
 import '../screens/acc_quests_screen.dart';
 import '../providers/auth.dart';
+import '../screens/roulette_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -47,6 +48,15 @@ class CustomDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.of(context)
                     .pushReplacementNamed(RankingScreen.routeName);
+              }),
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.card_giftcard),
+              title: const Text('Daily gift'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context)
+                    .pushReplacementNamed(RouletteScreen.routeName);
               }),
           const Divider(),
           ListTile(

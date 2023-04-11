@@ -50,6 +50,7 @@ class QuestProvider with ChangeNotifier {
             ));
       });
       _items = tempListQuest;
+      print(_items);
       notifyListeners();
     } catch (error) {
       throw error;
