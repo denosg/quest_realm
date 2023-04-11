@@ -45,7 +45,7 @@ As a software engineer working on the Quest App, I wanted to create a feature th
 
 The Quest App is a user-friendly and efficient way for users to access a variety of quests. By integrating with Firebase Cloud Database, user information and quest data is easily stored and retrieved. The app's home screen, bottom navigation bar, and custom drawer provide easy navigation, while the my quests screen allows users to create and edit quests. The source code of the app is stored in the lib folder.
 
-**How to install:**
+**How to install: (video):**
 https://youtube.com/shorts/00aPuWsuLDc?feature=share
 
 **Download link:**
