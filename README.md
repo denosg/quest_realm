@@ -48,7 +48,7 @@ The Quest App is a user-friendly and efficient way for users to access a variety
 **How to install:**
 https://youtube.com/shorts/00aPuWsuLDc?feature=share
 
-**Install link:**
+**Download link:**
 https://drive.google.com/file/d/1beij5Tyx0P1QPCaN48Tl7T-i022wRTrj/view?usp=share_link
 
 **How the app works (video):**
