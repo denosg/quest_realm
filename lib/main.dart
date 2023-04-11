@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:quest_realm/screens/quest_details_screen.dart';
 import 'package:quest_realm/screens/roulette_screen.dart';
 
 import './providers/acc_quests.dart';
@@ -13,7 +14,6 @@ import './screens/my_quests_screen.dart';
 import './providers/user_provider.dart';
 import './models/custom_material_color.dart';
 import './widgets/tabs_navigation.dart';
-import './screens/quest_details_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/splash_screen.dart';
 import './screens/ranking_screen.dart';
@@ -94,8 +94,6 @@ class MainApp extends StatelessWidget {
                   future: authData.tryAutoLogin(),
                 ),
           routes: {
-            // Quest details
-            QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
             // Edit Quest Screen
             EditQuestScreen.routeName: (context) => EditQuestScreen(),
             // My Quests Screen
@@ -106,6 +104,8 @@ class MainApp extends StatelessWidget {
             RankingScreen.routeName: (context) => RankingScreen(),
             // Roulette Screen
             RouletteScreen.routeName: (context) => RouletteScreen(),
+            // Quest Details Screen
+            QuestDetailsScreen.routeName: (context) => QuestDetailsScreen(),
           },
         ),
       ),

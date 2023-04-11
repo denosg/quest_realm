@@ -7,13 +7,30 @@ import '../widgets/custom_drawer.dart';
 import '../widgets/my_quest_item.dart';
 import '../providers/user_provider.dart';
 
-class MyQuestsScreen extends StatelessWidget {
+class MyQuestsScreen extends StatefulWidget {
   static const routeName = '/my-quests-screen';
+
+  @override
+  State<MyQuestsScreen> createState() => _MyQuestsScreenState();
+}
+
+class _MyQuestsScreenState extends State<MyQuestsScreen> {
+  var _isInit = true;
   // We need to have listen: false, otherwise it gets in an infinite loop
-  // show the quests created by each user
   Future<void> _refreshQuests(BuildContext context) async {
     await Provider.of<QuestProvider>(context, listen: false)
         .fetchAndSetQuests(true);
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      // fetches quests for each user
+      Provider.of<QuestProvider>(context, listen: false)
+          .fetchAndSetQuests(true);
+    }
+    _isInit = false;
+    super.didChangeDependencies();
   }
 
   @override
@@ -58,8 +75,6 @@ class MyQuestsScreen extends StatelessWidget {
       ),
       drawer: const CustomDrawer(),
       body: FutureBuilder(
-        // loads the products by user
-        future: _refreshQuests(context),
         builder: (context, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? const Center(
