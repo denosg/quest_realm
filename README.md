@@ -6,6 +6,17 @@ Quest App Documentation
 
 Quest App is an application that allows users to sign up and login to access a variety of quests. The app integrates with Firebase Cloud Database to store user information and quest data. The app also features a home screen that shows all available quests, a bottom navigation bar with a home screen and my quests screen, a custom drawer with home, accepted quests, ranking, and logout options.
 
+**Technical**
+
+The app was made using the Flutter SDK for the Front-End side and Firebase Cloud Realtime Database + Authentication for the Back-End side.
+Flutter is a powerful and popular mobile application development framework that offers many advantages when building mobile applications such as Quest App. Some of the advantages of using Flutter include:
+- Cross-platform development: Flutter allows developers to create mobile applications for both Android and iOS platforms using a single codebase. This helps to save time and resources while ensuring that the app functions seamlessly on both platforms.
+- Hot Reload: With Flutter's Hot Reload feature, developers can make changes to the app's code and see the results in real-time without having to restart the app. This helps to speed up the development process and makes it easier to test and debug the app.
+- Rich widgets: Flutter provides a wide range of customizable widgets that allow developers to create stunning and responsive user interfaces for their apps. These widgets are easy to use and can be customized to match the app's design and branding.
+- High-performance: Flutter's rendering engine, Skia, is designed to deliver high-performance graphics and animations, ensuring that the app runs smoothly and responds quickly to user interactions.
+- Access to native features: Flutter provides access to a wide range of native features and APIs, such as camera, location, and sensors, allowing developers to build apps that can access the full range of functionality available on the device.
+- Community support: Flutter has a large and active community of developers who contribute to the framework by creating plugins, packages, and documentation. This community support makes it easier for developers to find solutions to problems and stay up-to-date with the latest developments in the framework.
+
 **Sign Up and Login**
 
 The app allows users to sign up using their email and password. Upon signing up, the user's data is sent to Firebase Cloud Database for storage. Users can also login using their registered email and password. Upon logging in, the app retrieves the user's data from Firebase Cloud Database.
@@ -28,16 +39,16 @@ The custom drawer includes four options: home, accepted quests, ranking, and log
 
 **Personal Touch: Daily Gift Function**
 
-As a software engineer working on the Quest App, I wanted to create a feature that would encourage users to return to the app on a daily basis. To achieve this, I implemented a daily gift function with a roulette-style spin wheel. The daily gift function is accessed through a separate tab in the custom drawer. When a user clicks on the tab, they are taken to the daily gift screen where they can spin the roulette-style wheel once per day where the user can win from 0 to 75 points. I also used Firebase Cloud Database to store information about the user's daily gift spins. Overall, I'm proud of how the daily gift function turned out. It's a fun and interactive feature that encourages users to return to the app daily and engage with the content.
+As a programming enthusiast working on the Quest App, I wanted to create a feature that would encourage users to return to the app on a daily basis. To achieve this, I implemented a daily gift function with a roulette-style spin wheel. The daily gift function is accessed through a separate tab in the custom drawer. When a user clicks on the tab, they are taken to the daily gift screen where they can spin the roulette-style wheel once per day where the user can win from 0 to 75 points. I also used Firebase Cloud Database to store information about the user's daily gift spins. Overall, I'm proud of how the daily gift function turned out. It's a fun and interactive feature that encourages users to return to the app daily and engage with the content.
 
 **Conclusion**
 
-The Quest App is a user-friendly and efficient way for users to access a variety of quests. By integrating with Firebase Cloud Database, user information and quest data is easily stored and retrieved. The app's home screen, bottom navigation bar, and custom drawer provide easy navigation, while the my quests screen allows users to create and edit quests.
+The Quest App is a user-friendly and efficient way for users to access a variety of quests. By integrating with Firebase Cloud Database, user information and quest data is easily stored and retrieved. The app's home screen, bottom navigation bar, and custom drawer provide easy navigation, while the my quests screen allows users to create and edit quests. The source code of the app is stored in the lib folder.
 
-**How to install:**
+**How to install (video):**
 https://youtube.com/shorts/00aPuWsuLDc?feature=share
 
-**Install link:**
+**Download link:**
 https://drive.google.com/file/d/1beij5Tyx0P1QPCaN48Tl7T-i022wRTrj/view?usp=share_link
 
 **How the app works (video):**
