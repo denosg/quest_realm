@@ -26,15 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.didChangeDependencies();
   }
 
-  @override
-  void initState() {
-    // fetches the quests from the firebase database
-    Future.delayed(Duration.zero).then((value) {
-      Provider.of<QuestProvider>(context, listen: false).fetchAndSetQuests();
-    });
-    super.initState();
-  }
-
   // refreshes the loaded quests
   Future<void> _refreshQuests(BuildContext context) async {
     await Provider.of<QuestProvider>(context, listen: false)

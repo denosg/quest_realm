@@ -75,6 +75,7 @@ class _MyQuestsScreenState extends State<MyQuestsScreen> {
       ),
       drawer: const CustomDrawer(),
       body: FutureBuilder(
+        future: _refreshQuests(context),
         builder: (context, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
                 ? const Center(

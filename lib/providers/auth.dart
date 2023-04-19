@@ -85,7 +85,7 @@ class Auth with ChangeNotifier {
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       // autoLogout counter starts ->
-      //_autoLogout();
+      _autoLogout();
       notifyListeners();
       // gets the data for the AutoLogin
       final prefs = await SharedPreferences.getInstance();
@@ -95,7 +95,7 @@ class Auth with ChangeNotifier {
         'expiryDate': _expiryDate!.toIso8601String(),
       });
       // sets user's data regarding the auth
-      //prefs.setString('userData', userData);
+      prefs.setString('userData', userData);
       //Send json data to server database regarding user info
       Uri url = Uri.parse(
           'https://questrealm-cb1e3-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=$_token');
@@ -139,17 +139,17 @@ class Auth with ChangeNotifier {
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       // autoLogout counter starts ->
-      //_autoLogout();
+      _autoLogout();
       notifyListeners();
       // gets the data for the AutoLogin
-      //final prefs = await SharedPreferences.getInstance();
+      final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
         'userId': _userId,
         'expiryDate': _expiryDate!.toIso8601String(),
       });
       // sets user's data regarding the auth
-      //prefs.setString('userData', userData);
+      prefs.setString('userData', userData);
     } on HttpException catch (e) {
       throw e;
     }
