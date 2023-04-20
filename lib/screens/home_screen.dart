@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<UserProvider>(context, listen: false).fetchUserInfo();
       // loads user list
       Provider.of<UserProvider>(context, listen: false).fetchUsers();
+      // loads the quests
+      Provider.of<QuestProvider>(context, listen: false).fetchAndSetQuests();
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -64,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: const CustomDrawer(),
       body: FutureBuilder(
-        future: _refreshQuests(context),
+        // future: _refreshQuests(context),
         builder: (ctx, snapshot) =>
             snapshot.connectionState == ConnectionState.active
                 ? const Center(
